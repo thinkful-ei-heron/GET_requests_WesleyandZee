@@ -23,6 +23,7 @@ function handleSubmitButton() {
 
 function displayResults(responseJson) {
   for( let i = 0; i < responseJson.message.length; i++){
+    console.log(responseJson.message[i]);
     $('.results').append(`<img src='${responseJson.message[i]}' id="Img-holder">`);
   }
 }
