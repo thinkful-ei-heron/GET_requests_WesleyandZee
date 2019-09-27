@@ -1,12 +1,12 @@
 // Function to fetch information from the API
 
-function getDogImages(value) {
-  let endPoint = 'https://dog.ceo/api/breeds/image/random/';
-  console.log(endPoint + value);
-  fetch(endPoint + value)
+function getDogImages(breed) {
+  let endPoint = `https://dog.ceo/api/breed/${breed}/images/random`;
+  console.log(typeof breed);
+  fetch(endPoint)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
-    .catch(error => console.log('sorry this did not work'));
+    .catch(error => alert('sorry breed not found'));
   //console.log(getDogImages);
 }
 
@@ -14,7 +14,7 @@ function getDogImages(value) {
 function handleSubmitButton() {
   $('form').submit(event => {
     event.preventDefault();
-    let value = parseInt($('#value').val());
+    let value = $('#value').val();
     console.log(typeof value);
     getDogImages(value);
     // console.log(handleSubmitButton);
@@ -22,10 +22,13 @@ function handleSubmitButton() {
 }
 
 function displayResults(responseJson) {
-  for( let i = 0; i < responseJson.message.length; i++){
-    console.log(responseJson.message[i]);
-    $('.results').append(`<img src='${responseJson.message[i]}' id="Img-holder">`);
+  console.log(responseJson.message);
+  if (
+    responseJson.message === 'Breed not found (master breed does not exist)'
+  ) {
+    alert('breed not found');
   }
+  $('.results').append(`<img src='${responseJson.message}' id="Img-holder">`);
 }
 
 $(function() {
