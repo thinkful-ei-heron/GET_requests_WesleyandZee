@@ -1,11 +1,11 @@
 // Function to fetch information from the API
 
 const getDogImages = function(){
-  fetch('https://dog.ceo/api/breeds/image/random/')
+  fetch('https://dog.ceo/api/breeds/image/random/3')
     .then(response => response.json())
     .then(responseJson => 
       displayResults(responseJson))
-    .catch(error => 'sorry this did not work');
+    .catch(error => alert('sorry this did not work'));
 };
 
 
@@ -27,8 +27,9 @@ const convertValue = function(value){
 // function to render images to the screen. 
 const displayResults = function(responseJson){
   console.log(responseJson);
-  $('.results').replaceWith(
+  $('.results-img').replaceWith(
     `img src="${responseJson.message} class ="results-img>`);
+    
   $('.results').removeClass('hidden');
 };
 
