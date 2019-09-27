@@ -18,16 +18,16 @@ function handleSubmitButton() {
 }
 
 // function to covert value inputted. Expecting value as string. This returns that value as a number type.
-function convertValue(value) {
-  value = value.parseInt();
-  return value;
-  console.log(convertValue);
-}
+// function convertValue(value) {
+//   value = value.parseInt();
+//   return value;
+//   console.log(value);
+// }
 
 function displayResults(responseJson) {
   console.log(responseJson);
   $('.results-img').replaceWith(
-    `<img src="${responseJson.message} class="results-img">`
+    `<img src='${responseJson.message}' class='results-img'>`
   );
 
   $('.results').removeClass('hidden');
