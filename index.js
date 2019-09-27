@@ -1,7 +1,9 @@
 // Function to fetch information from the API
 
-function getDogImages() {
-  fetch('https://dog.ceo/api/breeds/image/random')
+function getDogImages(value) {
+  let endPoint = 'https://dog.ceo/api/breeds/image/random/';
+  console.log(endPoint + value);
+  fetch(endPoint + value)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
     .catch(error => alert('sorry this did not work'));
@@ -10,19 +12,21 @@ function getDogImages() {
 
 //handle function for the submit
 function handleSubmitButton() {
-  $('.submitButton').submit(event => {
+  $('form').submit(event => {
     event.preventDefault();
-    getDogImages();
+    let value = parseInt($('#value').val());
+    console.log(typeof value);
+    getDogImages(value);
     console.log(handleSubmitButton);
   });
 }
 
 // function to covert value inputted. Expecting value as string. This returns that value as a number type.
-// function convertValue(value) {
-//   value = value.parseInt();
-//   return value;
-//   console.log(value);
-// }
+function convertValue(value) {
+  value = value.parseInt();
+  return value;
+  console.log(value);
+}
 
 function displayResults(responseJson) {
   console.log(responseJson);
