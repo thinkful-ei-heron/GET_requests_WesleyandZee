@@ -5,13 +5,15 @@ function getDogImages() {
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
     .catch(error => alert('sorry this did not work'));
+  console.log(getDogImages);
 }
 
 //handle function for the submit
 function handleSubmitButton() {
-  $('.submitButton').submit(function(event) {
+  $('.submitButton').submit(event => {
     event.preventDefault();
     getDogImages();
+    console.log(handleSubmitButton);
   });
 }
 
@@ -19,6 +21,7 @@ function handleSubmitButton() {
 function convertValue(value) {
   value = value.parseInt();
   return value;
+  console.log(convertValue);
 }
 
 function displayResults(responseJson) {
