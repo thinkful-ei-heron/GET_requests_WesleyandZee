@@ -3,7 +3,9 @@
 const getDogImages = function(){
   fetch('https://dog.ceo/api/breeds/image/random/')
     .then(response => response.json())
-    .then(responseJson => console.log(responseJson));
+    .then(responseJson => 
+      displayResults(responseJson))
+    .catch(error => 'sorry this did not work');
 };
 
 
@@ -12,6 +14,7 @@ const getDogImages = function(){
 const handleSubmitButton = function(){
   $('.submitButton').submit(function(event){
     event.preventDefault();
+    getDogImages();
   });
 };
 
@@ -22,3 +25,14 @@ const convertValue = function(value){
 };
 
 // function to render images to the screen. 
+const displayResults = function(responseJson){
+  console.log(responseJson);
+  $('.results').replaceWith(
+    `img src="${responseJson.message} class ="results-img>`);
+  $('.results').removeClass('hidden');
+};
+
+$(function(){
+  console.log('app loaded! waiting for submit!');
+  handleSubmitButton();
+});
