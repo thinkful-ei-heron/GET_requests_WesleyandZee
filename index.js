@@ -6,8 +6,8 @@ function getDogImages(value) {
   fetch(endPoint + value)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
-    .catch(error => alert('sorry this did not work'));
-  console.log(getDogImages);
+    .catch(error => console.log('sorry this did not work'));
+  //console.log(getDogImages);
 }
 
 //handle function for the submit
@@ -17,24 +17,14 @@ function handleSubmitButton() {
     let value = parseInt($('#value').val());
     console.log(typeof value);
     getDogImages(value);
-    console.log(handleSubmitButton);
+    // console.log(handleSubmitButton);
   });
 }
 
-// function to covert value inputted. Expecting value as string. This returns that value as a number type.
-function convertValue(value) {
-  value = value.parseInt();
-  return value;
-  console.log(value);
-}
-
 function displayResults(responseJson) {
-  console.log(responseJson);
-  $('.results-img').replaceWith(
-    `<img src='${responseJson.message}' class='results-img'>`
-  );
-
-  $('.results').removeClass('hidden');
+  for( let i = 0; i < responseJson.message.length; i++){
+    $('.results').append(`<img src='${responseJson.message[i]}' id="Img-holder">`);
+  }
 }
 
 $(function() {
