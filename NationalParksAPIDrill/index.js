@@ -12,20 +12,31 @@ function handleSubmitButton(){
 }
 
 // handle API request and response.
-function searchNp(){
+function searchNp(searchParam,maxResults){
   let baseURL = 'https://developer.nps.gov/api/v1/parks?stateCode=';
-  let fullSearch = `${baseURL}${searchParam}`;
-
+  let limit = maxResults;
+  let fullSearch = `${baseURL}${searchParam}&limit=${limit}&api_key=${APIKEY}`;
+  console.log(fullSearch);
+  fetch(fullSearch)
+    .then(response => {
+      if(response.ok){
+        return response.json();
+      }
+    })
+    .then(responseJson => responseJson.data.map(x => ({name: x.name, description: x.description, url: x.url})))
+    .then(displayResults);
 }
 
 
-
-
 // handle render to the page
-function displayResults (){
+function displayResults (responseJson){
+  console.log(responseJson, typeof responseJson);
+  //let filteredResponse = responseJson.splice();
   for( let i = 0; i < responseJson.length; i++){
     $('#results-list').append(`
-    <a href="/placeholder/">placeholder</a><br>
+    <p>${i+1}.${responseJson[i].name}</p><br>
+    <a href="">${responseJson[i].url}</a><br>
+    <p>${responseJson[i].description}</p>
     `);
   }
 }
